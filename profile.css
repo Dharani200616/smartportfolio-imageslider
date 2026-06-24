@@ -1,0 +1,10 @@
+/* Profile Page Styles */
+.form-control[readonly] {
+    background: rgba(15, 23, 42, 0.3);
+    border-color: transparent;
+    color: var(--text-muted);
+}
+
+.stat-card form .form-label {
+    margin-bottom: 0.5rem;
+}

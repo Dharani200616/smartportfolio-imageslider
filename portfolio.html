@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | YoungBot Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .portfolio-hero{padding:100px 0 60px;background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(6,182,212,.06),transparent);position:relative;overflow:hidden}
+        .portfolio-hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.06),transparent 70%);top:-200px;right:-150px;animation:float 18s ease-in-out infinite}
+        .filter-btn{background:rgba(30,41,59,.5);border:1px solid rgba(255,255,255,.1);color:var(--text-muted);padding:.6rem 1.5rem;border-radius:50px;margin:5px;transition:all .3s;cursor:pointer}
+        .filter-btn.active,.filter-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 0 20px rgba(99,102,241,.4)}
+        .project-card{background:rgba(30,41,59,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:all .4s ease;height:100%}
+        .project-card:hover{transform:translateY(-8px);border-color:rgba(99,102,241,.3);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+        .project-img{height:220px;overflow:hidden;position:relative}
+        .project-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+        .project-card:hover .project-img img{transform:scale(1.1)}
+        .project-img .overlay-tag{position:absolute;top:12px;right:12px;padding:4px 14px;border-radius:20px;font-size:.7rem;font-weight:600;backdrop-filter:blur(8px)}
+        .tag-ai{background:rgba(99,102,241,.8);color:#fff}
+        .tag-robotics{background:rgba(34,197,94,.8);color:#fff}
+        .tag-ui{background:rgba(236,72,153,.8);color:#fff}
+        .tag-backend{background:rgba(251,146,60,.8);color:#fff}
+        .tag-fullstack{background:rgba(6,182,212,.8);color:#fff}
+        .feature-card{background:rgba(30,41,59,.5);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:2rem;text-align:center;transition:all .4s ease}
+        .feature-card:hover{transform:translateY(-8px);border-color:rgba(99,102,241,.25);box-shadow:0 15px 35px rgba(0,0,0,.3)}
+        .feature-icon{width:70px;height:70px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.2rem}
+    </style>
+</head>
+<body>
+    <div class="bg-lines"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top navbar-glass">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="slider.html"><span style="color:var(--primary);">Young</span>Bot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3 active" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="slider.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="fullstack.html">Full Stack</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="aiml.html">AI & ML</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="profile.html"><i class="bi bi-person-circle me-1"></i>Profile</a></li>
+                    <li class="nav-item px-3 d-none d-lg-block">
+                        <div class="d-flex gap-3">
+                            <a href="https://github.com" target="_blank" class="text-white-50 hover-primary"><i class="bi bi-github"></i></a>
+                            <a href="https://www.linkedin.com/company/young-bot-academy/" target="_blank" class="text-white-50 hover-primary"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="#" class="btn btn-outline-light px-3 rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#resumeModal"><i class="bi bi-file-earmark-person me-1"></i>Resume</a>
+                        <a href="index.html" class="btn btn-primary px-4 rounded-pill" onclick="localStorage.removeItem('yb_logged_in')">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="portfolio-hero animate-fade-in">
+        <div class="container text-center">
+            <span class="badge bg-primary bg-opacity-25 text-primary px-3 py-2 rounded-pill mb-3">🚀 YoungBot Academy Portfolio</span>
+            <h1 class="display-3 fw-800 mb-3">YoungBot <span class="text-gradient">Innovations</span></h1>
+            <p class="lead text-muted col-lg-8 mx-auto">Exploring the boundaries of robotics, AI, full-stack development, and cutting-edge UI/UX design.</p>
+        </div>
+    </header>
+
+    <!-- Feature Cards -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <div class="col-6 col-lg-3 animate-fade-in">
+                    <a href="fullstack.html" class="text-decoration-none">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon" style="background:rgba(6,182,212,.12);color:#06b6d4;"><i class="bi bi-layers"></i></div>
+                            <h6 class="fw-bold text-white">Full Stack</h6>
+                            <p class="text-muted small mb-0">End-to-end apps</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-lg-3 animate-fade-in delay-1">
+                    <a href="frontend.html" class="text-decoration-none">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon" style="background:rgba(236,72,153,.12);color:#ec4899;"><i class="bi bi-window-stack"></i></div>
+                            <h6 class="fw-bold text-white">Frontend</h6>
+                            <p class="text-muted small mb-0">Pixel-perfect UI</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-lg-3 animate-fade-in delay-2">
+                    <a href="backend.html" class="text-decoration-none">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon" style="background:rgba(34,197,94,.12);color:#22c55e;"><i class="bi bi-terminal"></i></div>
+                            <h6 class="fw-bold text-white">Backend</h6>
+                            <p class="text-muted small mb-0">APIs & servers</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-lg-3 animate-fade-in delay-3">
+                    <a href="uiux.html" class="text-decoration-none">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon" style="background:rgba(168,85,247,.12);color:#a855f7;"><i class="bi bi-brush"></i></div>
+                            <h6 class="fw-bold text-white">UI/UX</h6>
+                            <p class="text-muted small mb-0">Design systems</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-800 mb-2">Our <span class="text-gradient">Projects</span></h2>
+            <p class="text-center text-muted mb-4">Filter by category to explore our work.</p>
+            <div class="text-center mb-5 animate-fade-in">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ai">AI & ML</button>
+                <button class="filter-btn" data-filter="robotics">Robotics</button>
+                <button class="filter-btn" data-filter="ui">UI/UX</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+            </div>
+            <div class="row g-4" id="project-grid">
+                <div class="col-md-6 col-lg-4 project-item ai animate-fade-in">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop" alt="Neural Core">
+                            <span class="overlay-tag tag-ai">AI</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">Neural Core v2</h5>
+                            <p class="text-muted small">Deep learning architecture for real-time object recognition and classification.</p>
+                            <a href="aiml.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 project-item robotics animate-fade-in delay-1">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop" alt="YoungBot Arm">
+                            <span class="overlay-tag tag-robotics">Robotics</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">YoungBot Arm v3</h5>
+                            <p class="text-muted small">6-axis robotic arm with vision-guided precision manipulation.</p>
+                            <a href="fullstack.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 project-item ui animate-fade-in delay-2">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop" alt="Design System">
+                            <span class="overlay-tag tag-ui">UI/UX</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">Glassmorphism UI Kit</h5>
+                            <p class="text-muted small">Premium design system with 200+ components and dark mode support.</p>
+                            <a href="uiux.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 project-item backend animate-fade-in delay-3">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop" alt="Cloud API">
+                            <span class="overlay-tag tag-backend">Backend</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">Cloud API Gateway</h5>
+                            <p class="text-muted small">Scalable microservices architecture handling 10K+ requests per second.</p>
+                            <a href="backend.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 project-item fullstack animate-fade-in delay-4">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Dashboard">
+                            <span class="overlay-tag tag-fullstack">Full Stack</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">Analytics Dashboard</h5>
+                            <p class="text-muted small">Real-time data visualization platform with interactive charts.</p>
+                            <a href="fullstack.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 project-item ai animate-fade-in delay-5">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=800&auto=format&fit=crop" alt="NLP Engine">
+                            <span class="overlay-tag tag-ai">AI</span>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="fw-bold">NLP Engine</h5>
+                            <p class="text-muted small">Natural language processing for sentiment analysis and text classification.</p>
+                            <a href="aiml.html" class="btn btn-sm btn-outline-primary rounded-pill">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 text-center text-muted border-top border-secondary mt-5">
+        <div class="d-flex justify-content-center gap-4 mb-3">
+            <a href="https://github.com" target="_blank" class="text-muted fs-4 hover-primary"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/company/young-bot-academy/" target="_blank" class="text-muted fs-4 hover-primary"><i class="bi bi-linkedin"></i></a>
+        </div>
+        <p>© 2024 YoungBot Academy. All rights reserved.</p>
+    </footer>
+
+    <!-- Resume Maker Modal -->
+    <div class="modal fade" id="resumeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 text-light" style="background:rgba(20,20,40,.95);backdrop-filter:blur(15px);border-radius:20px;">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-file-earmark-person-fill text-primary me-2"></i>Auto Resume Maker</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="resumeForm">
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label text-muted small text-uppercase">Full Name</label><input type="text" class="form-control bg-dark border-secondary text-light" id="rName" placeholder="John Doe" required></div>
+                            <div class="col-md-6"><label class="form-label text-muted small text-uppercase">Title</label><input type="text" class="form-control bg-dark border-secondary text-light" id="rTitle" placeholder="AI Engineer" required></div>
+                            <div class="col-md-6"><label class="form-label text-muted small text-uppercase">Email</label><input type="email" class="form-control bg-dark border-secondary text-light" id="rEmail" placeholder="john@email.com" required></div>
+                            <div class="col-md-6"><label class="form-label text-muted small text-uppercase">Phone</label><input type="tel" class="form-control bg-dark border-secondary text-light" id="rPhone" placeholder="+1 234 567 8900"></div>
+                            <div class="col-12"><label class="form-label text-muted small text-uppercase">Summary</label><textarea class="form-control bg-dark border-secondary text-light" id="rSummary" rows="3" placeholder="Professional summary..."></textarea></div>
+                            <div class="col-12"><label class="form-label text-muted small text-uppercase">Skills (comma separated)</label><input type="text" class="form-control bg-dark border-secondary text-light" id="rSkills" placeholder="Python, ML, React..."></div>
+                            <div class="col-12"><label class="form-label text-muted small text-uppercase">Experience</label><textarea class="form-control bg-dark border-secondary text-light" id="rExp" rows="2" placeholder="Company - Role - Duration"></textarea></div>
+                            <div class="col-12"><label class="form-label text-muted small text-uppercase">Education</label><input type="text" class="form-control bg-dark border-secondary text-light" id="rEdu" placeholder="University - Degree - Year"></div>
+                        </div>
+                    </form>
+                    <div id="resumePreview" class="mt-4 p-4 d-none" style="background:#fff;color:#333;border-radius:12px;">
+                        <div class="text-center mb-3"><h2 class="fw-bold mb-1" id="pName"></h2><h6 class="text-primary" id="pTitle"></h6><p class="small text-muted mb-0"><span id="pEmail"></span> | <span id="pPhone"></span></p></div>
+                        <hr>
+                        <div class="mb-2"><h6 class="fw-bold text-uppercase border-bottom pb-1">Summary</h6><p class="small" id="pSummary"></p></div>
+                        <div class="mb-2"><h6 class="fw-bold text-uppercase border-bottom pb-1">Skills</h6><p class="small" id="pSkills"></p></div>
+                        <div class="mb-2"><h6 class="fw-bold text-uppercase border-bottom pb-1">Experience</h6><p class="small" id="pExp"></p></div>
+                        <div><h6 class="fw-bold text-uppercase border-bottom pb-1">Education</h6><p class="small" id="pEdu"></p></div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info px-4" onclick="generatePreview()">Preview</button>
+                    <button type="button" class="btn btn-primary px-4" onclick="downloadResume()"><i class="bi bi-download me-1"></i>Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter logic
+        document.querySelectorAll('.filter-btn').forEach(btn=>{
+            btn.addEventListener('click',()=>{
+                document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                const f=btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-item').forEach(item=>{
+                    if(f==='all'||item.classList.contains(f)){item.style.display='block';setTimeout(()=>{item.style.opacity='1';item.style.transform='scale(1)'},10)}
+                    else{item.style.opacity='0';item.style.transform='scale(0.8)';setTimeout(()=>item.style.display='none',300)}
+                });
+            });
+        });
+        // Resume
+        function generatePreview(){
+            ['Name','Title','Email','Phone','Summary','Skills','Exp','Edu'].forEach(k=>{
+                const el=document.getElementById('p'+k);
+                if(el)el.innerText=document.getElementById('r'+k).value||'—';
+            });
+            document.getElementById('resumeForm').classList.add('d-none');
+            document.getElementById('resumePreview').classList.remove('d-none');
+        }
+        function downloadResume(){alert('Resume PDF downloading… (Simulation)');const m=bootstrap.Modal.getInstance(document.getElementById('resumeModal'));m.hide();}
+        document.getElementById('resumeModal').addEventListener('hidden.bs.modal',()=>{document.getElementById('resumeForm').classList.remove('d-none');document.getElementById('resumePreview').classList.add('d-none');});
+    </script>
+</body>
+</html>

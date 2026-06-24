@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YoungBot Academy | Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{min-height:100vh;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+    .slides{position:fixed;inset:0;z-index:0}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease-in-out}
+    .slide.active{opacity:1}
+    .slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1600&q=80')}
+    .slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80')}
+    .slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1600&q=80')}
+    .slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80')}
+    .slide:nth-child(5){background-image:url('https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=1600&q=80')}
+    .overlay{position:fixed;inset:0;z-index:1;background:linear-gradient(135deg,rgba(0,0,0,.82),rgba(10,10,40,.7))}
+    .dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+    .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);border:1.5px solid rgba(255,255,255,.5);cursor:pointer;transition:all .3s}
+    .dot.active{background:#fff;transform:scale(1.3);box-shadow:0 0 8px rgba(255,255,255,.5)}
+    .float-circle{position:absolute;border-radius:50%;animation:floatC ease-in-out infinite alternate;z-index:2}
+    @keyframes floatC{from{transform:translateY(0)}to{transform:translateY(-18px)}}
+    .card-holder{position:relative;z-index:12;width:100%;max-width:500px;margin:1.5rem}
+    .glass-card{background:rgba(255,255,255,.06);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.15);border-radius:28px;padding:40px 36px 36px;box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1)}
+    h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:4px;color:#fff;text-shadow:0 0 30px rgba(99,102,241,.6)}
+    .subtitle{text-align:center;color:rgba(255,255,255,.45);font-size:13px;margin-bottom:28px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+    .field{margin-bottom:16px}
+    .field label{display:block;color:rgba(255,255,255,.55);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.9px;margin-bottom:6px}
+    .input-wrap{position:relative}
+    .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.55;pointer-events:none}
+    input{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:12px;padding:13px 14px 13px 42px;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;outline:none;transition:all .25s}
+    input::placeholder{color:rgba(255,255,255,.25)}
+    input:focus{border-color:rgba(99,102,241,.7);background:rgba(99,102,241,.1);box-shadow:0 0 0 4px rgba(99,102,241,.15)}
+    input.valid{border-color:rgba(34,197,94,.6)!important;background:rgba(34,197,94,.08)!important}
+    input.invalid{border-color:rgba(239,68,68,.6)!important;background:rgba(239,68,68,.08)!important}
+    .pw-wrap input{padding-right:44px}
+    .eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,.45);font-size:17px;padding:0}
+    .strength-row{display:flex;gap:5px;margin-top:7px}
+    .sbar{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:4px}
+    .sbar.weak{background:#ef4444}
+    .sbar.fair{background:#f97316}
+    .sbar.good{background:#eab308}
+    .sbar.strong{background:#22c55e}
+    .strength-lbl{font-size:10px;margin-top:5px;color:rgba(255,255,255,.4)}
+    .msg{font-size:11px;margin-top:5px;min-height:16px}
+    .msg.ok{color:#4ade80}
+    .msg.err{color:#f87171}
+    .btn-submit{width:100%;margin-top:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed,#a855f7);border:none;border-radius:60px;padding:14px;color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(99,102,241,.55);transition:all .3s}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(99,102,241,.8)}
+    .btn-submit:active{transform:translateY(1px) scale(.98)}
+    .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none}
+    @keyframes rippleAnim{to{transform:scale(5);opacity:0}}
+    .spinner{display:none;width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .divider{display:flex;align-items:center;gap:10px;margin:20px 0 14px;color:rgba(255,255,255,.2);font-size:12px}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+    .social-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .btn-social{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;color:rgba(255,255,255,.75);font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+    .btn-social:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff;transform:translateY(-2px)}
+    .switch-link{text-align:center;margin-top:18px;color:rgba(255,255,255,.4);font-size:13px}
+    .switch-link a{color:#a5b4fc;text-decoration:none;font-weight:600;cursor:pointer}
+    .terms{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+    .terms input[type=checkbox]{width:16px;height:16px;padding:0;accent-color:#6366f1;border-radius:4px}
+    .terms label{font-size:12px;color:rgba(255,255,255,.5);cursor:pointer}
+    .terms a{color:#a5b4fc;text-decoration:none}
+    @media(max-width:480px){.row2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="slides">
+    <div class="slide active"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+  <div class="overlay"></div>
+  <div class="dots" id="dots">
+    <div class="dot active" data-i="0"></div>
+    <div class="dot" data-i="1"></div>
+    <div class="dot" data-i="2"></div>
+    <div class="dot" data-i="3"></div>
+    <div class="dot" data-i="4"></div>
+  </div>
+
+  <div class="float-circle" style="width:80px;height:80px;border:2px solid rgba(99,120,220,.3);top:8%;left:15%;animation-duration:3.2s"></div>
+  <div class="float-circle" style="width:44px;height:44px;background:rgba(99,120,220,.18);top:20%;left:4%;animation-duration:4s"></div>
+  <div class="float-circle" style="width:30px;height:30px;background:rgba(160,174,240,.35);bottom:20%;left:7%;animation-duration:3.5s"></div>
+
+  <div class="card-holder">
+    <div class="glass-card">
+      <h1>🤖 Create Account</h1>
+      <p class="subtitle">Join YoungBot AI Ecosystem</p>
+
+      <div class="row2">
+        <div class="field">
+          <label>Full Name</label>
+          <div class="input-wrap"><span class="input-icon">👤</span><input type="text" id="regName" placeholder="Full Name"></div>
+          <div class="msg" id="regNameMsg"></div>
+        </div>
+        <div class="field">
+          <label>Username</label>
+          <div class="input-wrap"><span class="input-icon">🎮</span><input type="text" id="regUsername" placeholder="username"></div>
+          <div class="msg" id="regUserMsg"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <div class="input-wrap"><span class="input-icon">✉️</span><input type="email" id="regEmail" placeholder="you@email.com"></div>
+        <div class="msg" id="regEmailMsg"></div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label>Password</label>
+          <div class="input-wrap pw-wrap"><span class="input-icon">🔒</span><input type="password" id="regPwd" placeholder="Password"><button class="eye-btn" type="button" id="eyePwd">👁</button></div>
+          <div class="strength-row"><div class="sbar" id="s1"></div><div class="sbar" id="s2"></div><div class="sbar" id="s3"></div><div class="sbar" id="s4"></div></div>
+          <div class="strength-lbl" id="strLbl"></div>
+          <div class="msg" id="regPwdMsg"></div>
+        </div>
+        <div class="field">
+          <label>Confirm Password</label>
+          <div class="input-wrap pw-wrap"><span class="input-icon">🔑</span><input type="password" id="regPwd2" placeholder="Confirm"><button class="eye-btn" type="button" id="eyePwd2">👁</button></div>
+          <div class="msg" id="regPwd2Msg"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Role / Title</label>
+        <div class="input-wrap"><span class="input-icon">💼</span><input type="text" id="regRole" placeholder="e.g. AI Developer, Student"></div>
+      </div>
+
+      <div class="terms">
+        <input type="checkbox" id="agree">
+        <label for="agree">I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a></label>
+      </div>
+
+      <button class="btn-submit" id="regBtn"><span id="regBtnTxt">Create Account</span><div class="spinner" id="regSpin"></div></button>
+
+      <div class="divider">or sign up with</div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/company/young-bot-academy/" target="_blank" class="btn-social">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#0e76a8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 4.127 0 2.062 2.062 0 0 1-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.771-.773 1.771-1.729V1.729C24 .774 23.205 0 22.225 0z"/></svg> LinkedIn
+        </a>
+        <a href="https://github.com" target="_blank" class="btn-social">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub
+        </a>
+      </div>
+      <div class="switch-link">Already have an account? <a id="goLogin">Sign In →</a></div>
+    </div>
+  </div>
+
+<script>
+  // Redirect if already logged in
+  if(localStorage.getItem('yb_logged_in')==='true') window.location.href='slider.html';
+
+  // Slideshow
+  const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot');
+  let cur=0,timer;
+  function showSlide(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dots[cur].classList.add('active');}
+  function startAuto(){clearInterval(timer);timer=setInterval(()=>showSlide(cur+1),4500);}
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{showSlide(i);startAuto();}));
+  startAuto();
+
+  // Ripple
+  function ripple(e,el){const r=el.getBoundingClientRect(),s=Math.max(r.width,r.height),sp=document.createElement('span');sp.className='ripple';sp.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;el.appendChild(sp);setTimeout(()=>sp.remove(),600);}
+
+  // Field helpers
+  function setStatus(inp,msgEl,ok,okMsg,errMsg){
+    if(!inp.value.trim()){inp.classList.remove('valid','invalid');msgEl.innerHTML='';return false;}
+    inp.classList.toggle('valid',ok);inp.classList.toggle('invalid',!ok);
+    msgEl.className='msg '+(ok?'ok':'err');msgEl.textContent=(ok?'✓ '+okMsg:'✗ '+errMsg);return ok;
+  }
+
+  // Validators
+  const regName=document.getElementById('regName'),regUser=document.getElementById('regUsername'),
+        regEmail=document.getElementById('regEmail'),regPwd=document.getElementById('regPwd'),
+        regPwd2=document.getElementById('regPwd2');
+
+  function vName(){return setStatus(regName,document.getElementById('regNameMsg'),regName.value.trim().length>=2,'Valid name','Min 2 characters');}
+  function vUser(){const v=regUser.value.trim();return setStatus(regUser,document.getElementById('regUserMsg'),v.length>=3&&/^[a-zA-Z0-9_]+$/.test(v),'Available','3+ chars, letters/numbers/_');}
+  function vEmail(){const v=regEmail.value.trim();return setStatus(regEmail,document.getElementById('regEmailMsg'),/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),'Looks good','Enter valid email');}
+  function vPwd(){
+    const p=regPwd.value,bars=['s1','s2','s3','s4'].map(id=>document.getElementById(id)),lbl=document.getElementById('strLbl');
+    bars.forEach(b=>b.className='sbar');if(!p){lbl.textContent='';return false;}
+    let sc=0;if(p.length>=8)sc++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))sc++;if(/[0-9]/.test(p))sc++;if(/[^A-Za-z0-9]/.test(p))sc++;
+    const cls=['','weak','fair','good','strong'],lbs=['','Weak','Fair','Good','Strong'];
+    for(let i=0;i<sc;i++)bars[i].classList.add(cls[sc]);lbl.textContent=lbs[sc]||'';
+    return setStatus(regPwd,document.getElementById('regPwdMsg'),p.length>=8,'Strong','Min 8 characters');
+  }
+  function vPwd2(){return setStatus(regPwd2,document.getElementById('regPwd2Msg'),regPwd2.value===regPwd.value&&regPwd2.value.length>0,'Passwords match','Passwords do not match');}
+
+  regName.addEventListener('input',vName);regUser.addEventListener('input',vUser);
+  regEmail.addEventListener('input',vEmail);regPwd.addEventListener('input',vPwd);
+  regPwd2.addEventListener('input',vPwd2);
+
+  document.getElementById('eyePwd').addEventListener('click',()=>{regPwd.type=regPwd.type==='password'?'text':'password';document.getElementById('eyePwd').textContent=regPwd.type==='password'?'👁':'🙈';});
+  document.getElementById('eyePwd2').addEventListener('click',()=>{regPwd2.type=regPwd2.type==='password'?'text':'password';document.getElementById('eyePwd2').textContent=regPwd2.type==='password'?'👁':'🙈';});
+
+  // Submit
+  document.getElementById('regBtn').addEventListener('click',function(e){
+    ripple(e,this);
+    const ok=vName()&vUser()&vEmail()&vPwd()&vPwd2();
+    if(!ok){document.querySelector('.card-holder').animate([{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:300});return;}
+    if(!document.getElementById('agree').checked){alert('Please agree to terms!');return;}
+    const btnTxt=document.getElementById('regBtnTxt'),spin=document.getElementById('regSpin');
+    btnTxt.style.display='none';spin.style.display='block';this.disabled=true;
+    // Save user to localStorage
+    const user={name:regName.value.trim(),username:regUser.value.trim(),email:regEmail.value.trim(),password:regPwd.value,role:document.getElementById('regRole').value.trim()||'YoungBot Member',avatar:'https://ui-avatars.com/api/?name='+encodeURIComponent(regName.value.trim())+'&background=6366f1&color=fff',joined:new Date().toLocaleDateString()};
+    localStorage.setItem('yb_user',JSON.stringify(user));
+    setTimeout(()=>{window.location.href='login.html';},1400);
+  });
+
+  document.getElementById('goLogin').addEventListener('click',()=>window.location.href='login.html');
+
+  // Enter key
+  document.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('regBtn').click();});
+</script>
+</body>
+</html>

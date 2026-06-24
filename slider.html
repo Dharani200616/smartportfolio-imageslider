@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | YoungBot Academy</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!-- Custom Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .carousel-item { height: 100vh; }
+        .slider-container { padding-top: 0; height: 100vh; }
+        .carousel { width: 100%; max-width: 100%; border-radius: 0; height: 100vh; }
+        .navbar-glass { position: fixed; top: 0; left: 0; right: 0; z-index: 1050; }
+        .carousel-caption { bottom: 15%; max-width: 600px; }
+        .caption-badge { 
+            display: inline-block; padding: 4px 16px; border-radius: 20px; 
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; 
+            text-transform: uppercase; margin-bottom: 12px;
+            background: rgba(99,102,241,0.3); border: 1px solid rgba(99,102,241,0.5);
+        }
+        .slide-counter {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1060;
+            background: rgba(15,23,42,0.7); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 30px;
+            padding: 8px 20px; font-size: 0.85rem; color: rgba(255,255,255,0.7);
+        }
+        .explore-btn {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 1060;
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-lines"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-glass">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="slider.html">
+                <span style="color: var(--primary);">Young</span>Bot
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sliderNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="sliderNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link px-3 active" href="slider.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="portfolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="fullstack.html">Full Stack</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="aiml.html">AI & ML</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="profile.html"><i class="bi bi-person-circle me-1"></i>Profile</a></li>
+                    <li class="nav-item px-3 d-none d-lg-block">
+                        <div class="d-flex gap-3">
+                            <a href="https://github.com" target="_blank" class="text-white-50 hover-primary"><i class="bi bi-github"></i></a>
+                            <a href="https://www.linkedin.com/company/young-bot-academy/" target="_blank" class="text-white-50 hover-primary"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="index.html" class="btn btn-primary px-4 rounded-pill" onclick="localStorage.removeItem('yb_logged_in')">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full-Screen Carousel with 15 Dataflow/Tech Images -->
+    <div class="slider-container">
+        <div id="youngbotCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="4"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="5"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="6"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="7"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="8"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="9"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="10"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="11"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="12"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="13"></button>
+                <button type="button" data-bs-target="#youngbotCarousel" data-bs-slide-to="14"></button>
+            </div>
+            
+            <div class="carousel-inner">
+                <!-- 1. Data Streams -->
+                <div class="carousel-item active" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2000&auto=format&fit=crop" alt="Data Streams">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Dataflow</span>
+                        <h3 class="fw-800">Real-Time Data Streams</h3>
+                        <p>Processing millions of data points per second with intelligent pipelines.</p>
+                    </div>
+                </div>
+                <!-- 2. Network Infrastructure -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" alt="Network Globe">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Netflow</span>
+                        <h3 class="fw-800">Global Network Flow</h3>
+                        <p>Interconnected systems spanning continents with zero-latency routing.</p>
+                    </div>
+                </div>
+                <!-- 3. Server Architecture -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop" alt="Server Room">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Infrastructure</span>
+                        <h3 class="fw-800">Cloud Architecture</h3>
+                        <p>Secure, scalable server farms powering next-gen applications.</p>
+                    </div>
+                </div>
+                <!-- 4. Circuit Board / Data -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop" alt="Circuit Board">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Hardware</span>
+                        <h3 class="fw-800">Silicon Intelligence</h3>
+                        <p>Custom chip architectures optimized for AI inference workloads.</p>
+                    </div>
+                </div>
+                <!-- 5. Code / Programming -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop" alt="Code Screen">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Development</span>
+                        <h3 class="fw-800">Clean Code Architecture</h3>
+                        <p>Elegant algorithms driving complex business logic at scale.</p>
+                    </div>
+                </div>
+                <!-- 6. Digital Data Visualization -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=2000&auto=format&fit=crop" alt="Data Visualization">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Analytics</span>
+                        <h3 class="fw-800">Data Visualization</h3>
+                        <p>Transforming raw data into actionable visual intelligence.</p>
+                    </div>
+                </div>
+                <!-- 7. AI Robot -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2000&auto=format&fit=crop" alt="AI Robot">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">YoungBot</span>
+                        <h3 class="fw-800">Autonomous Intelligence</h3>
+                        <p>Self-learning robots with neural decision-making capabilities.</p>
+                    </div>
+                </div>
+                <!-- 8. Fiber Optic / Network -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2000&auto=format&fit=crop" alt="Fiber Optics">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Connectivity</span>
+                        <h3 class="fw-800">Fiber Optic Highways</h3>
+                        <p>Blazing-fast data transmission across fiber optic networks.</p>
+                    </div>
+                </div>
+                <!-- 9. Digital Lock / Cybersecurity -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f2?q=80&w=2000&auto=format&fit=crop" alt="Cybersecurity">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Security</span>
+                        <h3 class="fw-800">Cyber Defense Systems</h3>
+                        <p>Military-grade encryption protecting critical data flows.</p>
+                    </div>
+                </div>
+                <!-- 10. Neon City / Anime Theme -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=2000&auto=format&fit=crop" alt="Tokyo Neon">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Anime / Neon</span>
+                        <h3 class="fw-800">Neon Tokyo Nights</h3>
+                        <p>Cyberpunk-inspired interfaces blending art with technology.</p>
+                    </div>
+                </div>
+                <!-- 11. Holographic Display -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?q=80&w=2000&auto=format&fit=crop" alt="Holographic">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Future Tech</span>
+                        <h3 class="fw-800">Holographic Data</h3>
+                        <p>Next-generation interfaces projecting data into 3D space.</p>
+                    </div>
+                </div>
+                <!-- 12. Machine Learning Pipeline -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=2000&auto=format&fit=crop" alt="ML Pipeline">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Machine Learning</span>
+                        <h3 class="fw-800">ML Pipelines</h3>
+                        <p>Automated training, validation, and deployment of AI models.</p>
+                    </div>
+                </div>
+                <!-- 13. Smart City -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?q=80&w=2000&auto=format&fit=crop" alt="Smart City">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Smart City</span>
+                        <h3 class="fw-800">Connected Cities</h3>
+                        <p>IoT-powered urban infrastructure for smarter living.</p>
+                    </div>
+                </div>
+                <!-- 14. Digital Twin / VR -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?q=80&w=2000&auto=format&fit=crop" alt="VR Tech">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Virtual Reality</span>
+                        <h3 class="fw-800">Digital Twin Worlds</h3>
+                        <p>Immersive simulations mirroring real-world data in real-time.</p>
+                    </div>
+                </div>
+                <!-- 15. Quantum Computing -->
+                <div class="carousel-item" data-bs-interval="2500">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop" alt="Quantum">
+                    <div class="data-overlay"></div>
+                    <div class="carousel-caption d-none d-md-block animate-fade-in">
+                        <span class="caption-badge">Quantum</span>
+                        <h3 class="fw-800">Quantum Computing</h3>
+                        <p>Exploring qubits and superposition for exponential processing power.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#youngbotCarousel" data-bs-slide="prev">
+                <div class="control-icon"><i class="bi bi-chevron-left fs-4"></i></div>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#youngbotCarousel" data-bs-slide="next">
+                <div class="control-icon"><i class="bi bi-chevron-right fs-4"></i></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <!-- Explore Portfolio Button -->
+    <a href="portfolio.html" class="explore-btn btn btn-primary btn-lg rounded-pill px-5 shadow-lg">
+        <i class="bi bi-collection me-2"></i>Explore Portfolio
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Slide counter
+        const carousel = document.getElementById('youngbotCarousel');
+        carousel.addEventListener('slid.bs.carousel', event => {
+            document.getElementById('currentSlide').textContent = event.to + 1;
+        });
+    </script>
+</body>
+</html>

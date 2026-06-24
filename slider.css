@@ -1,0 +1,92 @@
+/* Slider Styles */
+.slider-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 80px;
+}
+
+.carousel {
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(99, 102, 241, 0.3);
+    border: 1px solid var(--glass-border);
+}
+
+.carousel-item {
+    height: 600px;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: brightness(0.7);
+    transition: transform 0.5s ease;
+}
+
+.carousel-item.active img {
+    transform: scale(1.05);
+}
+
+.carousel-caption {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    bottom: 10%;
+    border: 1px solid var(--glass-border);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.data-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(15, 23, 42, 0.8) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.control-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(99, 102, 241, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.control-icon:hover {
+    background: var(--primary);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.bg-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+    background-image: linear-gradient(var(--primary) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveGrid 20s linear infinite;
+}
+
+@keyframes moveGrid {
+    from { background-position: 0 0; }
+    to { background-position: 50px 50px; }
+}

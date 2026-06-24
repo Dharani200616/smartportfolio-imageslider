@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YoungBot Academy | Smart Portfolio</title>
+  <script>
+    // If already logged in, go to dashboard; else go to register
+    const user = localStorage.getItem('yb_logged_in');
+    if (user === 'true') {
+      window.location.href = 'slider.html';
+    } else {
+      window.location.href = 'register.html';
+    }
+  </script>
+</head>
+<body></body>
+</html>
